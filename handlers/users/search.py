@@ -1,12 +1,6 @@
 from aiogram import types
 from loader import dp, bot, db
-
-
-def stop_search():
-    markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
-    item1 = types.KeyboardButton("❌ Qidirishni to'xtatish")
-    markup.add(item1)
-    return markup
+from keyboards.default.stopKeyboard import stop
 
 
 @dp.message_handler(commands=['search'])
@@ -16,7 +10,7 @@ async def search_user(message: types.Message):
 
     if db.create_chat(message.chat.id, chat_two) == False:
         db.add_queue(message.chat.id, db.get_gender(message.chat.id))
-        await message.answer("👻 Suhbatdosh qidirilmoqda", reply_markup=stop_search())
+        await message.answer("👻 Suhbatdosh qidirilmoqda", reply_markup=stop)
     else:
         msg = '👤 Suhbatdosh topildi\n\n/next - yangi suhbatdosh qidirish\n/stop - suhbatni to\'xtatish'
         markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
