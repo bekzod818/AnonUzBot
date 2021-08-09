@@ -2,6 +2,7 @@ from aiogram import types
 from loader import dp, bot, db
 from keyboards.default.menuKeyboard import menu
 from keyboards.default.stopKeyboard import stop
+from keyboards.inline.users_age import inline_markup
 
 
 @dp.message_handler(content_types=['text'])
@@ -9,19 +10,19 @@ async def do_bot(message: types.Message):
     if message.chat.type == 'private':
         if message.text == 'Erkak 👨':
             if db.set_gender(message.chat.id, 'male'):
-                await bot.send_message(message.chat.id, '✅ Sizning jinsingiz muvaffaqiyatli qo\'shildi!',
-                                 reply_markup=menu)
+                await bot.send_message(message.chat.id, '✅ Sizning jinsingiz muvaffaqiyatli qo\'shildi!\n\n🤫 Yoshingiz oralig\'ini tanlang\n',
+                                 reply_markup=inline_markup)
             else:
                 await bot.send_message(message.chat.id,
-                                 f'❌ Siz allaqachon jinsingizni ko\'rsatgansiz. \n🔄 Ma\'lumotlarni o\'zgartirish - /settings', reply_markup=menu)
+                                 f'✅ Sizning jinsingiz muvaffaqiyatli qo\'shildi!\n\n🤫 Yoshingiz oralig\'ini tanlang\n', reply_markup=inline_markup)
 
         elif message.text == 'Ayol 👩‍🦱':
             if db.set_gender(message.chat.id, 'female'):
-                await bot.send_message(message.chat.id, '✅ Sizning jinsingiz muvaffaqiyatli qo\'shildi!',
-                                 reply_markup=menu)
+                await bot.send_message(message.chat.id, '✅ Sizning jinsingiz muvaffaqiyatli qo\'shildi!\n\n🤫 Yoshingiz oralig\'ini tanlang\n',
+                                 reply_markup=inline_markup)
             else:
                 await bot.send_message(message.chat.id,
-                                 f'❌ Siz allaqachon jinsingizni ko\'rsatgansiz. \n🔄 Ma\'lumotlarni o\'zgartirish - /settings', reply_markup=menu)
+                                 f'✅ Sizning jinsingiz muvaffaqiyatli qo\'shildi!\n\n🤫 Yoshingiz oralig\'ini tanlang\n', reply_markup=inline_markup)
 
         elif message.text == '👤 Suhbatdosh qidirish':
             user_info = db.get_chat()
