@@ -1,6 +1,7 @@
 from . import help
 from . import start
 from . import menu
+from . import check
 from . import user_age
 from . import search
 from . import next
